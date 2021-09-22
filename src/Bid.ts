@@ -1,5 +1,6 @@
 import { TypedDataSigner } from "@ethersproject/abstract-signer";
 import { BigNumberish, BytesLike, utils } from "ethers";
+import { constants } from "ethers/lib.esm";
 import { _TypedDataEncoder } from "ethers/lib/utils";
 
 const TYPES = {
@@ -67,6 +68,6 @@ export class Bid {
 
     verify(chainId: number, exchange: string, v: number, r: string, s: string) {
         const signer = utils.verifyTypedData(getDomain(chainId, exchange), TYPES, this.getValue(), { v, r, s });
-        return signer.toLowerCase() == this.signer.toLowerCase();
+        return signer != constants.AddressZero && signer.toLowerCase() == this.signer.toLowerCase();
     }
 }
