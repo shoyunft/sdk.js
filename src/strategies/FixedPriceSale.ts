@@ -1,4 +1,4 @@
-import { BigNumberish, BytesLike, utils } from "ethers";
+import { BigNumber, BigNumberish, BytesLike, utils } from "ethers";
 
 class FixedPriceSale {
     static from(params: BytesLike) {
@@ -6,10 +6,10 @@ class FixedPriceSale {
         return new FixedPriceSale(result.price);
     }
 
-    price: BigNumberish;
+    price: BigNumber;
 
     constructor(price: BigNumberish) {
-        this.price = price;
+        this.price = BigNumber.from(price.toString());
     }
 
     encode() {

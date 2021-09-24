@@ -1,4 +1,4 @@
-import { BigNumberish, BytesLike, utils } from "ethers";
+import { BigNumber, BigNumberish, BytesLike, utils } from "ethers";
 
 class EnglishAuction {
     static from(params: BytesLike) {
@@ -6,10 +6,10 @@ class EnglishAuction {
         return new EnglishAuction(result.startPrice);
     }
 
-    startPrice: BigNumberish;
+    startPrice: BigNumber;
 
     constructor(startPrice: BigNumberish) {
-        this.startPrice = startPrice;
+        this.startPrice = BigNumber.from(startPrice.toString());
     }
 
     encode() {

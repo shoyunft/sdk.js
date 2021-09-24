@@ -1,4 +1,4 @@
-import { BigNumberish, BytesLike, utils } from "ethers";
+import { BigNumber, BigNumberish, BytesLike, utils } from "ethers";
 
 class DesignatedSale {
     static from(params: BytesLike) {
@@ -6,11 +6,11 @@ class DesignatedSale {
         return new DesignatedSale(result.minPrice, result.designee);
     }
 
-    minPrice: BigNumberish;
+    minPrice: BigNumber;
     designee: string;
 
     constructor(minPrice: BigNumberish, designee: string) {
-        this.minPrice = minPrice;
+        this.minPrice = BigNumber.from(minPrice.toString());
         this.designee = designee;
     }
 
