@@ -1,6 +1,11 @@
-import { BigNumberish, utils } from "ethers";
+import { BigNumberish, BytesLike, utils } from "ethers";
 
 class EnglishAuction {
+    static from(params: BytesLike) {
+        const result = utils.defaultAbiCoder.decode(["uint256"], params);
+        return new EnglishAuction(result.startPrice);
+    }
+
     startPrice: BigNumberish;
 
     constructor(startPrice: BigNumberish) {
@@ -8,7 +13,7 @@ class EnglishAuction {
     }
 
     encode() {
-        return utils.solidityPack(["uint256"], [this.startPrice]);
+        return utils.defaultAbiCoder.encode(["uint256"], [this.startPrice]);
     }
 }
 

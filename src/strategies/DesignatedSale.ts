@@ -1,6 +1,11 @@
-import { BigNumberish, utils } from "ethers";
+import { BigNumberish, BytesLike, utils } from "ethers";
 
-class DutchAuction {
+class DesignatedSale {
+    static from(params: BytesLike) {
+        const result = utils.defaultAbiCoder.decode(["uint256", "address"], params);
+        return new DesignatedSale(result.minPrice, result.designee);
+    }
+
     minPrice: BigNumberish;
     designee: string;
 
@@ -10,8 +15,8 @@ class DutchAuction {
     }
 
     encode() {
-        return utils.solidityPack(["uint256", "address"], [this.minPrice, this.designee]);
+        return utils.defaultAbiCoder.encode(["uint256", "address"], [this.minPrice, this.designee]);
     }
 }
 
-export default DutchAuction;
+export default DesignatedSale;
