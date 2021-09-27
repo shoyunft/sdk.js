@@ -1,5 +1,5 @@
 import { TypedDataSigner } from "@ethersproject/abstract-signer";
-import { BigNumberish, BytesLike, utils } from "ethers";
+import { BigNumber, BigNumberish, BytesLike, utils } from "ethers";
 import { constants } from "ethers/lib.esm";
 import { _TypedDataEncoder } from "ethers/lib/utils";
 
@@ -24,10 +24,10 @@ function getDomain(chainId: number, exchange: string) {
 }
 
 export class Bid {
-    askHash: BytesLike;
+    askHash: string;
     signer: string;
-    amount: BigNumberish;
-    price: BigNumberish;
+    amount: BigNumber;
+    price: BigNumber;
     recipient: string;
     referrer: string;
 
@@ -39,10 +39,10 @@ export class Bid {
         recipient: string,
         referrer: string
     ) {
-        this.askHash = askHash;
+        this.askHash = utils.hexlify(askHash);
         this.signer = signer;
-        this.amount = amount;
-        this.price = price;
+        this.amount = BigNumber.from(amount);
+        this.price = BigNumber.from(price);
         this.recipient = recipient;
         this.referrer = referrer;
     }
@@ -51,8 +51,8 @@ export class Bid {
         return {
             askHash: this.askHash,
             signer: this.signer,
-            amount: this.amount,
-            price: this.price,
+            amount: this.amount.toString(),
+            price: this.price.toString(),
             recipient: this.recipient,
             referrer: this.referrer,
         };

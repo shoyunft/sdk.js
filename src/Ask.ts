@@ -1,5 +1,5 @@
 import { TypedDataSigner } from "@ethersproject/abstract-signer";
-import { BigNumberish, BytesLike, utils } from "ethers";
+import { BigNumber, BigNumberish, BytesLike, utils } from "ethers";
 import { constants } from "ethers/lib.esm";
 import { _TypedDataEncoder } from "ethers/lib/utils";
 
@@ -31,13 +31,13 @@ export class Ask {
     signer: string;
     proxy: string;
     token: string;
-    tokenId: BigNumberish;
-    amount: BigNumberish;
+    tokenId: BigNumber;
+    amount: BigNumber;
     strategy: string;
     currency: string;
     recipient: string;
-    deadline: BigNumberish;
-    params: BytesLike;
+    deadline: BigNumber;
+    params: string;
 
     constructor(
         signer: string,
@@ -54,13 +54,13 @@ export class Ask {
         this.signer = signer;
         this.proxy = proxy;
         this.token = token;
-        this.tokenId = tokenId;
-        this.amount = amount;
+        this.tokenId = BigNumber.from(tokenId);
+        this.amount = BigNumber.from(amount);
         this.strategy = strategy;
         this.currency = currency;
         this.recipient = recipient;
-        this.deadline = deadline;
-        this.params = params;
+        this.deadline = BigNumber.from(deadline);
+        this.params = utils.hexlify(params);
     }
 
     private getValue() {
@@ -68,12 +68,12 @@ export class Ask {
             signer: this.signer,
             proxy: this.proxy,
             token: this.token,
-            tokenId: this.tokenId,
-            amount: this.amount,
+            tokenId: this.tokenId.toString(),
+            amount: this.amount.toString(),
             strategy: this.strategy,
             currency: this.currency,
             recipient: this.recipient,
-            deadline: this.deadline,
+            deadline: this.deadline.toString(),
             params: this.params,
         };
     }
