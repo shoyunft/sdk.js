@@ -6,6 +6,7 @@ import { _TypedDataEncoder } from "ethers/lib/utils";
 const TYPES = {
     Ask: [
         { name: "signer", type: "address" },
+        { name: "proxy", type: "address" },
         { name: "token", type: "address" },
         { name: "tokenId", type: "uint256" },
         { name: "amount", type: "uint256" },
@@ -28,6 +29,7 @@ function getDomain(chainId: number, exchange: string) {
 
 export class Ask {
     signer: string;
+    proxy: string;
     token: string;
     tokenId: BigNumberish;
     amount: BigNumberish;
@@ -39,6 +41,7 @@ export class Ask {
 
     constructor(
         signer: string,
+        proxy: string,
         token: string,
         tokenId: BigNumberish,
         amount: BigNumberish,
@@ -49,6 +52,7 @@ export class Ask {
         params: BytesLike
     ) {
         this.signer = signer;
+        this.proxy = proxy;
         this.token = token;
         this.tokenId = tokenId;
         this.amount = amount;
@@ -62,6 +66,7 @@ export class Ask {
     private getValue() {
         return {
             signer: this.signer,
+            proxy: this.proxy,
             token: this.token,
             tokenId: this.tokenId,
             amount: this.amount,
