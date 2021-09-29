@@ -1,7 +1,5 @@
 import { TypedDataSigner } from "@ethersproject/abstract-signer";
-import { BigNumber, BigNumberish, BytesLike, utils } from "ethers";
-import { constants } from "ethers/lib.esm";
-import { _TypedDataEncoder } from "ethers/lib/utils";
+import { BigNumber, BigNumberish, BytesLike, utils, constants } from "ethers";
 
 const TYPES = {
     Ask: [
@@ -79,7 +77,7 @@ export class Ask {
     }
 
     hash() {
-        return _TypedDataEncoder.hashStruct("Ask", TYPES, this.getValue());
+        return utils._TypedDataEncoder.hashStruct("Ask", TYPES, this.getValue());
     }
 
     async sign(chainId: number, exchange: string, signer: TypedDataSigner) {
