@@ -3,7 +3,7 @@ import { BigNumber, BigNumberish, BytesLike, utils } from "ethers";
 class DutchAuction {
     static from(params: BytesLike) {
         const result = utils.defaultAbiCoder.decode(["uint256", "uint256", "uint256"], params);
-        return new DutchAuction(result.startPrice, result.endPrice, result.startedAt);
+        return new DutchAuction(result[0], result[1], result[2]);
     }
 
     startPrice: BigNumber;
