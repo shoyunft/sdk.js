@@ -3,7 +3,7 @@ import { BigNumber, BigNumberish, BytesLike, utils } from "ethers";
 class EnglishAuction {
     static from(params: BytesLike) {
         const result = utils.defaultAbiCoder.decode(["uint256"], params);
-        return new EnglishAuction(result.startPrice);
+        return new EnglishAuction(result[0]);
     }
 
     startPrice: BigNumber;

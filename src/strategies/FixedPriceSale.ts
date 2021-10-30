@@ -3,7 +3,7 @@ import { BigNumber, BigNumberish, BytesLike, utils } from "ethers";
 class FixedPriceSale {
     static from(params: BytesLike) {
         const result = utils.defaultAbiCoder.decode(["uint256"], params);
-        return new FixedPriceSale(result.price);
+        return new FixedPriceSale(result[0]);
     }
 
     price: BigNumber;
